@@ -1,36 +1,23 @@
-import React, { useState, useEffect } from 'react'
+import { useState } from "react";
+import { products } from "../../data/products";
+import Categories from "../../components/molecules/Categories";
+import ProductsGrid from "../../components/organisms/ProductsGrid";
 
 export default function AdminProductos() {
-  const [productos, setProductos] = useState([])
-  const [form, setForm] = useState({ nombre: '', precio: 0 })
+  const [category, setCategory] = useState("todo");
 
-  useEffect(() => {
-    setProductos([{ id: 1, nombre: 'Mock Camiseta', precio: 20 }])
-  }, [])
-
-  const agregar = () => {
-    setProductos([...productos, { id: Date.now(), ...form }])
-    setForm({ nombre: '', precio: 0 })
-  }
-
-  const eliminar = id => {
-    setProductos(productos.filter(p => p.id !== id))
-  }
+  const filtered =
+    category === "todo"
+      ? products
+      : products.filter((p) => p.category === category);
 
   return (
     <div>
-      <h2>Admin - Productos</h2>
-      <input placeholder="Nombre" value={form.nombre} onChange={e => setForm({ ...form, nombre: e.target.value })} />
-      <input placeholder="Precio" type="number" value={form.precio} onChange={e => setForm({ ...form, precio: +e.target.value })} />
-      <button onClick={agregar}>Agregar</button>
+      <h2 style={{ fontSize: "1.8rem", marginBottom: "20px" }}>Administrar Productos</h2>
 
-      <ul>
-        {productos.map(p => (
-          <li key={p.id}>{p.nombre} - ${p.precio}
-            <button onClick={() => eliminar(p.id)}>Eliminar</button>
-          </li>
-        ))}
-      </ul>
+      <Categories selected={category} onSelect={setCategory} />
+
+      <ProductsGrid products={filtered} />
     </div>
-  )
+  );
 }

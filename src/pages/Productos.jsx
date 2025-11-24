@@ -1,24 +1,23 @@
-import React from "react";
-
-const productos = [
-  { id: 1, nombre: "Producto 1", precio: 120 },
-  { id: 2, nombre: "Producto 2", precio: 250 },
-  { id: 3, nombre: "Producto 3", precio: 75 },
-];
+import { useState } from "react";
+import { products } from "../data/products";
+import Categories from "../components/molecules/Categories";
+import ProductsGrid from "../components/organisms/ProductsGrid";
 
 export default function Productos() {
+  const [category, setCategory] = useState("todo");
+
+  const filtered =
+    category === "todo"
+      ? products
+      : products.filter((p) => p.category === category);
+
   return (
     <div>
       <h2 style={{ fontSize: "1.8rem", marginBottom: "20px" }}>Productos</h2>
-      <div className="product-grid">
-        {productos.map((p) => (
-          <div key={p.id} className="product-card">
-            <h3>{p.nombre}</h3>
-            <p>${p.precio}</p>
-            <button>Agregar al carrito</button>
-          </div>
-        ))}
-      </div>
+
+      <Categories selected={category} onSelect={setCategory} />
+
+      <ProductsGrid products={filtered} />
     </div>
   );
 }

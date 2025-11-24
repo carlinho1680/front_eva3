@@ -1,33 +1,31 @@
-import React from "react";
+import React from 'react';
 
-const Input = ({
-    type = "text",
+const TextArea = ({
     placeholder = "",
     name = "",
     id,
     value = "",
     onChange = () => {},
     required = false,
-    autoComplete = "",
     className = "",
     disabled = false,
     maxLength,
+    rows = 8,
 }) => {
     return (
-        <input
-            type={type}
+        <textarea
             placeholder={placeholder}
             name={name}
             id={id || name}
             value={value}
             onChange={onChange}
             required={required}
-            autoComplete={autoComplete}
             disabled={disabled}
             className={className}
             maxLength={maxLength}
+            rows={rows}
         />
     );
 };
 
-export default Input;
+export default TextArea;
