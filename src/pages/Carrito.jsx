@@ -49,6 +49,10 @@ export default function Carrito() {
 
           <h2 className="carrito-total">Total: ${total.toLocaleString("es-CL")}</h2>
 
+          <button className="btn-vaciar" onClick={() => navigate("/finalizarcompra")}>
+            Finalizar Compra
+          </button>
+
           <button className="btn-vaciar" onClick={vaciarCarrito}>Vaciar carrito</button>
         </>
       )}

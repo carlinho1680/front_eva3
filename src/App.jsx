@@ -8,7 +8,6 @@ import Home from "./pages/Home";
 import Productos from "./pages/Productos";
 import ProductoDetalle from "./pages/ProductoDetalle";
 import Carrito from "./pages/Carrito";
-import FinalizarCompra from "./pages/FinalizarCompra";
 import Nosotros from "./pages/Nosotros";
 import Contacto from "./pages/Contacto";
 import Login from "./pages/auth/Login";
@@ -16,6 +15,13 @@ import Register from "./pages/auth/Register";
 import Perfil from "./pages/Perfil";
 import AdminHome from "./pages/admin/AdminHome";
 import AdminProductos from "./pages/admin/AdminProductos";
+import AdminCrearProducto from "./pages/admin/AdminCrearProducto";
+import AdminEditarProducto from "./pages/admin/AdminEditarProducto";
+import AdminVentas from "./pages/admin/AdminVentas";
+import MisCompras from './pages/MisCompras';
+import MisCompraDetalle from "./pages/MisCompraDetalle";
+
+
 
 function App() {
   return (
@@ -30,12 +36,16 @@ function App() {
             <Route path="/productos" element={<Productos />} />
             <Route path="/producto/:id" element={<ProductoDetalle />} />
             <Route path="/carrito" element={<Carrito />} />
-            <Route path="/finalizar-compra" element={<FinalizarCompra />} />
+            <Route path="/mis-compras" element={<MisCompras />} />
+            <Route path="/mis-compras/:id" element={<MisCompraDetalle />} />
             <Route path="/nosotros" element={<Nosotros />} />
             <Route path="/contacto" element={<Contacto />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-
+            <Route path="/admin/productos" element={<ProtectedRoute><AdminProductos /></ProtectedRoute>} />
+            <Route path="/admin/productos/crear" element={<ProtectedRoute><AdminCrearProducto /></ProtectedRoute>} />
+            <Route path="/admin/ventas" element={<ProtectedRoute role="admin"><AdminVentas/></ProtectedRoute>} />
+            <Route path="/admin/productos/editar/:id" element={<ProtectedRoute><AdminEditarProducto /></ProtectedRoute>} />
             <Route
               path="/perfil"
               element={
@@ -49,14 +59,6 @@ function App() {
               element={
                 <ProtectedRoute role="admin">
                   <AdminHome />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/admin/productos"
-              element={
-                <ProtectedRoute role="admin">
-                  <AdminProductos />
                 </ProtectedRoute>
               }
             />
